@@ -2,7 +2,7 @@
 
 SC_HAS_PROCESS(Consumer);
 
-Consumer::Consumer(sc_module_name name, int num_of_wait_cycles)
+Consumer::Consumer(const sc_module_name &name, int num_of_wait_cycles)
     : sc_module(name), num_of_wait_cycles(num_of_wait_cycles) {
     cout << this->name() << " is created." << endl;
     SC_THREAD(main);

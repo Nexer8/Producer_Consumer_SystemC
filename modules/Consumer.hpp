@@ -9,7 +9,7 @@ public:
     sc_out<bool> is_busy_out;
     int num_of_wait_cycles;
 
-    Consumer(sc_module_name name, int num_of_wait_cycles);
+    Consumer(const sc_module_name &name, int num_of_wait_cycles);
 
     void main();
 };

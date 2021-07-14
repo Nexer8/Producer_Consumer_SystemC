@@ -7,16 +7,19 @@
 
 #include "modules/TopModule.hpp"
 
-using namespace std;
+#define DEFAULT_NO_OF_CONSUMERS 1
+#define DEFAULT_NO_OF_WAIT_CYCLES 30
+
+using std::string;
 
 int sc_main(int argc, char *argv[]) {
-    int num_of_consumers = 1;
-    int num_of_wait_cycles = 30;
+    int num_of_consumers = DEFAULT_NO_OF_CONSUMERS;
+    int num_of_wait_cycles = DEFAULT_NO_OF_WAIT_CYCLES;
     int opt;
 #ifdef LOAD_BALANCING
-    string writing_policy = "Load Balancing";
+    const string writing_policy = "Load Balancing";
 #else
-    string writing_policy = "Round Robin";
+    const string writing_policy = "Round Robin";
 #endif
 
     while ((opt = getopt(argc, argv, "p:c:")) != -1) {
@@ -32,6 +35,8 @@ int sc_main(int argc, char *argv[]) {
             case '?':
                 cerr << "Unknown option: '" << char(optopt) << "'!" << endl;
                 break;
+            default:
+                break;
         }
     }
 
@@ -41,11 +46,11 @@ int sc_main(int argc, char *argv[]) {
     sc_start();
 
     cout << endl
-         << "SUMMARY" << endl;
-    cout << "Writing policy: " << writing_policy << endl;
-    cout << "Number of consumers: " << num_of_consumers << endl;
-    cout << "Number of cycles per wait: " << num_of_wait_cycles << endl;
-    cout << "Duration: " << sc_time_stamp().to_double() << "ps" << endl;
+         << "SUMMARY" << endl
+         << "Writing policy: " << writing_policy << endl
+         << "Number of consumers: " << num_of_consumers << endl
+         << "Number of cycles per wait: " << num_of_wait_cycles << endl
+         << "Duration: " << sc_time_stamp().to_double() << "ps" << endl;
 
     return 0;
 }

@@ -6,22 +6,20 @@
 
 #include <systemc.h>
 
-using namespace std;
-
 #define NUM_OF_TRANSACTIONS 100000
 
 class Producer : public sc_module {
 private:
-    random_device rd;
-    mt19937 gen{rd()};
-    uniform_int_distribution<int> dist;
+    std::random_device rd;
+    std::mt19937 gen{rd()};
+    std::uniform_int_distribution<int> dist;
     int num_of_consumers;
 
 public:
-    vector<sc_fifo_out<int>> out;
-    vector<sc_in<bool>> is_busy_in_vec;
+    std::vector<sc_fifo_out<int>> out;
+    std::vector<sc_in<bool>> is_busy_in_vec;
 
-    Producer(sc_module_name name, int num_of_consumers);
+    Producer(const sc_module_name& name, int num_of_consumers);
 
     void main();
 

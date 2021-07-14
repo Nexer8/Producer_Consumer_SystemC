@@ -1,10 +1,17 @@
 #include "Producer.hpp"
+#include <random>
+
+#define RANDOM_INT_LOWER_BOUND 1
+#define RANDOM_INT_UPPER_BOUND 30
+
+using std::uniform_int_distribution;
+using std::vector;
 
 SC_HAS_PROCESS(Producer);
 
-Producer::Producer(sc_module_name name, int num_of_consumers)
+Producer::Producer(const sc_module_name &name, int num_of_consumers)
     : sc_module(name), num_of_consumers(num_of_consumers) {
-    dist = uniform_int_distribution<int>(1, 30);
+    dist = uniform_int_distribution<int>(RANDOM_INT_LOWER_BOUND, RANDOM_INT_UPPER_BOUND);
     out = vector<sc_fifo_out<int>>(num_of_consumers);
     is_busy_in_vec = vector<sc_in<bool>>(num_of_consumers);
 

@@ -1,9 +1,11 @@
 #include "TopModule.hpp"
+#include <string>
 
-TopModule::TopModule(sc_module_name name, int num_of_consumers, int num_of_wait_cycles)
-    : sc_module(name),
-      num_of_consumers(num_of_consumers),
-      num_of_wait_cycles(num_of_wait_cycles) {
+using std::make_shared;
+using std::to_string;
+
+TopModule::TopModule(const sc_module_name &name, int num_of_consumers, int num_of_wait_cycles)
+    : sc_module(name), num_of_consumers(num_of_consumers), num_of_wait_cycles(num_of_wait_cycles) {
 
     cout << this->name() << " is created." << endl;
     producer = make_shared<Producer>("Producer1", num_of_consumers);
