@@ -7,13 +7,13 @@ set(CMAKE_PREFIX_PATH /opt/systemc-2.3.3/)
 find_package(SystemCLanguage CONFIG REQUIRED)
 
 file(GLOB sources
-        "*.cpp"
-        "modules/*.cpp"
-        )
+    "*.cpp"
+    "modules/*.cpp"
+)
 
 add_executable(
-        testsystemc
-        ${sources}
+    testsystemc
+    ${sources}
 )
 
 option(LOAD_BALANCING "Use load balancing" OFF) # Enabled by default
@@ -23,11 +23,11 @@ if (LOAD_BALANCING)
 endif (LOAD_BALANCING)
 
 target_link_libraries(
-        testsystemc
-        PRIVATE SystemC::systemc
+    testsystemc
+    PRIVATE SystemC::systemc
 )
 
 set_property(
-        TARGET testsystemc
-        PROPERTY CXX_STANDARD 11
+    TARGET testsystemc
+    PROPERTY CXX_STANDARD 11
 )
